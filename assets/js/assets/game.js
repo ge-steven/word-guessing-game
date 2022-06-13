@@ -142,8 +142,12 @@ var start = function() {
 
 // Continue to next word
 var nextWord = function(res) {
+    // Play sound and add score accordingly
     if(res == "correct") {
+        playSound(correctAudio)
         score++
+    } else {
+        playSound(wrongAudio)
     }
     result_items[index] =  [current_item, res]
 
@@ -188,6 +192,8 @@ async function startTimer(){
         seconds = 59;
         mins --;
         if(mins < 0) {
+            // Ran out of time
+            playSound(outOfTimeAudio)
             quit()
         }
     }

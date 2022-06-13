@@ -6,7 +6,6 @@ https://ge-steven.github.io/word-guessing-game/
 
 ## Application TODOs
 * Optimize for smartphones
-* Add sound indicators
 * In browser deck editor
 * Enable/Disable timer button
 * Collapse navbar when game start/ends

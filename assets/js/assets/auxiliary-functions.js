@@ -32,3 +32,9 @@ var decodeUriArray = function(array) {
     }
     return result
 }
+
+// Play audio immediatly
+var playSound = function(audio) {
+  audio.currentTime = 0;
+  audio.play();
+}
