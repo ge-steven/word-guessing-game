@@ -10,7 +10,8 @@ var title = ""
 var container = "";
 var correctAudio = "";
 var wrongAudio = "";
-var outOfTimeaudio = "";
+var outOfTimeAudio = "";
+var startAudio = "";
 
 // When window is loaded, load existing data and set function for import button
 window.onload = function() {
@@ -37,4 +38,5 @@ window.onload = function() {
         correctAudio = new Audio('assets/sounds/correct.mp3');
         wrongAudio = new Audio('assets/sounds/wrong.mp3');
         outOfTimeAudio = new Audio('assets/sounds/outoftime.mp3');
+        startAudio = new Audio('assets/sounds/start.mp3');
 }

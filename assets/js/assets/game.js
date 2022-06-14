@@ -112,6 +112,7 @@ var shuffle = function (array) {
 
 // Game state change functions
 var start = function() {
+
     // Get the set game values
     mins = document.getElementById("minutesInput").value;
     seconds = document.getElementById("secondsInput").value;
@@ -137,6 +138,11 @@ var start = function() {
     container.innerHTML += "<button class='btn btn-sm btn-outline-secondary' onclick='nextWord(" + '"correct"' + ")' style='position:absolute; left:0; top:0; height:100%; width:10%; font-size:1em' id='correct'><b>correct</br>(key: a)</b></button>"
     container.innerHTML += "<button class='btn btn-sm btn-outline-secondary' onclick='nextWord(" + '"wrong"' + ")' style='position:absolute; right:0; top:0; height:100%; width:10%; font-size:1em' id='wrong'><b>skip</br>(key: l)</b></button>"
     container.innerHTML += "<button class='btn btn-sm btn-outline-secondary' onclick='quit()' style='position:absolute; text-align:center; left:45%; bottom:0; height:10%; width:10%; font-size:1em'><b>quit</b></button>"
+
+    // Start sound
+    playSound(startAudio)
+
+    // Start timer
     startTimer()
 }
 
