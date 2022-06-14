@@ -15,7 +15,9 @@ var timer = "";
 var items = [];
 var mins = 0;
 var seconds = 0;
-var gameFontSize = 1
+var gameFontSize = 1;
+var countdownSetting = 3;
+var countdownValue = 0;
 
 // Reset game
 var resetGameVariables = function() {
@@ -68,8 +70,12 @@ var gameSettingsElements = function() {
       <form id="timeInput" style="text-align:center; font-size:1em"> \
         <input style="width:20%; display:inline" class="form-control" id="fontSizeInput" type="number" value="' + gameFontSize + '"> em\
       </form></br> \
+        <p style="text-align:center; font-size:1em"><b>Countdown timer</b></p> \
+      <form id="timeInput" style="text-align:center; font-size:1em"> \
+        <input style="width:20%; display:inline" class="form-control" id="countdown" type="number" value="' + countdownSetting + '"> Seconds \
+      </form></br> \
       <div> \
-        <button id="start-button" onclick="start()" type="button" class="btn btn-sm btn-outline-secondary" style="height:100%; width:100%; font-size:1em"><b>Start</br>(spacebar)</b></button> \
+        <button id="start-button" onclick="countdown()" type="button" class="btn btn-sm btn-outline-secondary" style="height:100%; width:100%; font-size:1em"><b>Start</br>(spacebar)</b></button> \
       </div>'
 
     return result
@@ -85,9 +91,9 @@ var keyActions = function(e) {
         }
     }
     else  {
-    if (e.keyCode == 32) {
-        start()
-    }
+        if (e.keyCode == 32) {
+            countdown()
+        }
     }
 };
 
@@ -110,15 +116,29 @@ var shuffle = function (array) {
   return array;
 }
 
-// Game state change functions
-var start = function() {
-
+// Start the countdown timer before actually starting the game
+var countdown = function() {
     // Get the set game values
     mins = document.getElementById("minutesInput").value;
     seconds = document.getElementById("secondsInput").value;
     timer = mins + ":" + seconds
     gameFontSize = document.getElementById("fontSizeInput").value;
+    countdownSetting = document.getElementById("countdown").value;
+    countdownValue = countdownSetting
 
+    // Construct countdown ui
+    container.innerHTML = ""
+    container.innerHTML += '<center> \
+                                <div id="timer"> \
+                                <p style="font-weight: bold;">Starting in</p>  \
+                                <p id="seconds" style="font-weight: bold;"> ' + countdownValue + '</p>  \
+                                </div> \
+                            </center>'
+    countdownTimer()
+}
+
+// Game state change functions
+var start = function() {
     // Shuffle deck
     items = shuffle(items)
 
@@ -158,6 +178,7 @@ var nextWord = function(res) {
     result_items[index] =  [current_item, res]
 
     if(items.length == 0) {
+        playSound(finishedAudio)
         end()
         return
     }
@@ -190,7 +211,7 @@ var quit = function() {
     end()
 }
 
-// Start timer
+// Start timer (amount of time you have to get through the words)
 async function startTimer(){
   timex = setTimeout(function(){
       seconds--;
@@ -217,5 +238,19 @@ async function startTimer(){
 
 
       startTimer();
+  },1000);
+}
+
+// Delay before game starts
+function countdownTimer(){
+  timex = setTimeout(function(){
+      countdownValue--;
+    if(countdownValue < 0){
+        start()
+        return
+    }
+    document.getElementById("seconds").innerHTML = countdownValue
+
+      countdownTimer();
   },1000);
 }
