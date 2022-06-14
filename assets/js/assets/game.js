@@ -129,11 +129,13 @@ var countdown = function() {
     // Construct countdown ui
     container.innerHTML = ""
     container.innerHTML += '<center> \
-                                <div id="timer"> \
-                                <p style="font-weight: bold;">Starting in</p>  \
-                                <p id="seconds" style="font-weight: bold;"> ' + countdownValue + '</p>  \
+                                <div style="height:100%" id="timer"> \
+                                <p style="font-weight: bold;font-size:2em">Starting in</p>  \
+                                <p id="seconds" style="font-weight: bold;font-size:2em"> ' + countdownValue + '</p>  \
                                 </div> \
                             </center>'
+    container.innerHTML += "<button class='btn btn-sm btn-outline-secondary' style='position:absolute; left:0; top:0; height:100%; width:10%; font-size:1em'><b>correct</br>(key: a)</b></button>"
+    container.innerHTML += "<button class='btn btn-sm btn-outline-secondary' style='position:absolute; right:0; top:0; height:100%; width:10%; font-size:1em'><b>skip</br>(key: l)</b></button>"
     countdownTimer()
 }
 
