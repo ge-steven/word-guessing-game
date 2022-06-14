@@ -5,7 +5,6 @@
 https://ge-steven.github.io/word-guessing-game/
 
 ## Application TODOs
-* Add delay timer before game starts
 * Optimize for smartphones
 * In browser deck editor
 * Enable/Disable timer button
